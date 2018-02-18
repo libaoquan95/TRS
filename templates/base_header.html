@@ -70,7 +70,7 @@
                         </a>
                         <ul class="dropdown-menu">
                                 <li><a href="/user/login"><span class="glyphicon glyphicon-log-in"></span> 登录</a></li>
-                                <li><a href="/photo/myphotos/1"><span class="glyphicon glyphicon-picture"></span> 我的照片</a></li>
+                                <li><a href="/photo/list/1"><span class="glyphicon glyphicon-picture"></span> 我的照片</a></li>
                             <li role="separator" class="divider"></li>
                             <li><a href="/user/logout"><span class="glyphicon glyphicon-log-out"></span> 登出</a></li>
                         </ul>
@@ -86,5 +86,14 @@
     {% block footer %} 
     {% endblock %}
     
+    <script>
+        $(function () {
+            $('[data-toggle="popover"]').popover()
+        })
+        $(function () {
+            $('[data-toggle="tooltip"]').tooltip()
+        })
+    </script>
+
 </body>
 </html>
