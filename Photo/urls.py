@@ -5,7 +5,8 @@ from . import views as photoView
 
 urlpatterns = [
     path('upload/', photoView.uploadPhoto),
-    path('myphotos/<int:pageNum>/', photoView.getPhotosByUser),
-    path('<int:photoId>/', photoView.getPhotoById),
+    path('list/<int:pageNum>/', photoView.getPhotosByUser),
     path('map/<int:photoId>/', photoView.getPhotoGeoById),
+    path('delete/<int:photoId>/', photoView.deletePhotoById),
+    path('<int:photoId>/', photoView.getPhotoById),
 ]
