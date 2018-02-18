@@ -1,0 +1,47 @@
+{% extends "base_no_header.html" %}
+
+{% block title %} 注册 {% endblock %}
+
+{% block mainBody %}
+<div class="container">
+<div class="row">
+    <div class="col-md-12">
+        <div class="page-header">
+            <h1>Sing up <small></small></h1>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-6 col-md-offset-3">
+        <div class="panel panel-default">
+            <div class="panel-heading">注册</div>
+            <div class="panel-body">
+                <form action="/user/login/" method="post">
+                    <div class="form-group">
+                        <label for="userName">用户名</label>
+                        <input type="text" class="form-control" id="userName" name="userName" placeholder="请输入用户名">
+                    </div>
+                    <div class="form-group">
+                        <label for="password">密码</label>
+                        <input type="password" class="form-control" id="password" name="password" placeholder="请输入密码">
+                    </div>
+                    <div class="form-group">
+                        <label for="password2">确认密码</label>
+                        <input type="password" class="form-control" id="password2" name="password2" placeholder="请输入密码">
+                    </div>
+                    <div class="form-group">
+                        <a href="/user/login/">有账号，去登录</a>
+                    </div>
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-primary text-right">注&nbsp;&nbsp;册</button>
+                </form>
+            </div>
+            {% if hasError == True %} 
+                <div class="panel-footer">{{ loginError }}</div>
+            {% endif %} 
+        </div>
+    </div>
+</div>
+</div>
+{% endblock %}

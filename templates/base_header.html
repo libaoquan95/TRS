@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+    <title>{% block title %} {% endblock %}</title>
+    <link href="/static/bootstrap-3.3.7-dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/static/css/main.css" rel="stylesheet">
+    <script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
+    <script src="/static/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+    {% block otherCssJs %} {% endblock %}
+</head>
+
+<body>
+    <!-- 图片上传模板 -->
+    <div class="modal fade" id="uploadPhotoModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">上传照片</h4>
+                </div>
+                <div class="modal-body">
+                    <form action="/photo/upload/" method="POST" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <input type="file" name="image" class="btn">
+                </div>
+                <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">上传</button>
+                    </form>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">取消</button> 
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- header -->
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/">TRS</a>
+            </div>
+        
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li {% block recommendHeaderTag %} {% endblock %}><a href="/attraction/recommend/">景点推荐</a></li>
+                    <li {% block footprintHeaderTag %} {% endblock %}><a href="/">足迹</a></li>
+                    <li> <a data-toggle="modal" data-target="#uploadPhotoModal">上传照片</a></li>
+                    {% block currentHeaderTag %} {% endblock %}
+                </ul>
+    
+                <form class="navbar-form navbar-left">
+                    <input type="text" class="form-control" placeholder="Search">
+                    <button type="submit" class="btn btn-info"><span class="glyphicon glyphicon-search"></span></button>
+                </form>
+    
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                            <span class="glyphicon glyphicon-user"></span>  {% block headerUserName %} {% endblock %} <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu">
+                                <li><a href="/user/login"><span class="glyphicon glyphicon-log-in"></span> 登录</a></li>
+                                <li><a href="/photo/myphotos/1"><span class="glyphicon glyphicon-picture"></span> 我的照片</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a href="/user/logout"><span class="glyphicon glyphicon-log-out"></span> 登出</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    {% block mainBody %} 
+    {% endblock %}
+
+    {% block footer %} 
+    {% endblock %}
+    
+</body>
+</html>

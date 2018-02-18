@@ -1,0 +1,46 @@
+{% extends "base_header.html" %}
+
+{% block title %}首页{% endblock %}
+
+{% block otherCssJs %}
+    <link href="/static/css/map.css" rel="stylesheet">
+    <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"></script>
+    <script type="text/javascript" src="http://api.map.baidu.com/library/TextIconOverlay/1.2/src/TextIconOverlay_min.js"></script>
+    <script type="text/javascript" src="http://api.map.baidu.com/library/MarkerClusterer/1.2/src/MarkerClusterer_min.js"></script>
+{% endblock %}
+
+{% block footprintHeaderTag %}class="active"{% endblock %}
+
+{% block headerUserName %}{{ uid }}{% endblock %}
+
+{% block mainBody %} 
+
+<!-- 地图 -->
+<div id="map"></div>
+
+<!-- 工具栏 -->
+<div class="container mapTool">
+    <div class="row">
+        <div class="col-md-4  col-md-offset-8">
+            <div class="panel panel-default">
+                <div class="panel-heading">我的足迹</div>
+                <div class="panel-body">
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 照片geo数据 -->
+<div style="display:none">
+    <div id='photoDataLon'>
+        {% for p in photos %}{{ p.longitude }},{% endfor %}
+    </div>
+    <div id='photoDataLat'>
+        {% for p in photos %}{{ p.latitude }},{% endfor %}
+    </div>
+</div>
+<script type="text/javascript" src="/static/js/map.js"></script>
+
+{% endblock %}

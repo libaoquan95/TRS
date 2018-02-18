@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block title %}景点推荐{% endblock %}
+
+{% block recommendHeaderTag %}class="active"{% endblock %}
+
+{% block headerUserName %}{{ uid }}{% endblock %}
+
+{% block mainBody %} 
+
+<div class="container mainBody">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="page-header">
+                <h1>推荐景点 <small></small></h1>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        {% for a in attractions%}
+        <div class="col-md-3">
+            <div class="thumbnail">
+                <img src="{{ a.imageUrl }}" alt="" onerror="javascript:this.src='/static/img/temp.svg';" class="miniImg img-rounded">
+                <div class="caption">
+                    <h4><span class="glyphicon glyphicon-map-marker"></span> {{ a.provinceName }}</h4>
+                    <p>
+                        <a href="/attraction/album/{{a.provinceId}}/{{a.clusterId}}/1" class="btn btn-primary" role="button" title="景点相册">
+                            <span class="glyphicon glyphicon-folder-open"></span>
+                        </a>
+                        <a href="/attraction/map/{{a.provinceId}}/{{a.clusterId}}" class="btn btn-default" role="button" title="景点地图">
+                            <span class="glyphicon glyphicon-globe"></span>
+                        </a>
+                    </p>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock %}

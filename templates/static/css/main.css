@@ -1,0 +1,32 @@
+.mainBody {
+    margin-top: 50px;
+}
+
+html {
+    position: relative;
+    min-height: 100%;
+}
+
+body {
+    margin-bottom: 60px;
+}
+
+footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 60px;
+    background-color: #000000;
+}
+
+.htmertext{
+    width: 100%;
+    white-space: nowrap;  
+    overflow: hidden;  
+    text-overflow:ellipsis;
+}
+
+.miniImg {
+    height: 200px!important;
+    width: 242px!important;
+}

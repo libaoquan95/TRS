@@ -1,0 +1,32 @@
+{% extends "base_header.html" %}
+
+{% block title %}首页{% endblock %}
+
+{% block otherCssJs %}
+    <link href="/static/css/map.css" rel="stylesheet">
+    <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"></script>
+    <script type="text/javascript" src="http://api.map.baidu.com/library/TextIconOverlay/1.2/src/TextIconOverlay_min.js"></script>
+    <script type="text/javascript" src="http://api.map.baidu.com/library/MarkerClusterer/1.2/src/MarkerClusterer_min.js"></script>
+{% endblock %}
+
+{% block recommendHeaderTag %}class="active"{% endblock %}
+
+{% block headerUserName %}{{ uid }}{% endblock %}
+
+{% block mainBody %} 
+
+<!-- 地图 -->
+<div id="map"></div>
+
+<!-- 照片geo数据 -->
+<div style="display:none">
+    <div id='photoDataLon'>
+        {{ photo.longitude }},
+    </div>
+    <div id='photoDataLat'>
+        {{ photo.latitude }},
+    </div>
+</div>
+<script type="text/javascript" src="/static/js/map.js"></script>
+
+{% endblock %}

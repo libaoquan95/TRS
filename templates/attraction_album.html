@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+
+{% block title %}景点相册{% endblock %}
+
+{% block currentHeaderTag %} <li class="active"><a href="#">相册</a></li> {% endblock %}
+
+{% block headerUserName %}{{ uid }}{% endblock %}
+
+{% block mainBody %} 
+
+<div class="container mainBody">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="page-header">
+                <h1>景点相册 <small></small></h1>
+            </div>
+        </div>
+    </div>
+    
+    <div class="row">
+        {% for p in photos %}
+        <div class="col-md-3">
+            <div class="thumbnail">
+                <img src="{{ p.imageUrl }}" alt="" onerror="javascript:this.src='/static/img/temp.svg';" class="miniImg img-rounded">
+                <div class="caption">
+                    <p title="{{ p.location }}" class="htmertext"><span class="glyphicon glyphicon-map-marker"></span> {{ p.location }}</p>
+                    <p><span class="glyphicon glyphicon-user"></span> {{ p.userName }}</p>
+                    <p><span class="glyphicon glyphicon-time"></span> {{ p.takenDate }}</p>
+                    <p>
+                        <a href="/photo/{{p.id}}/" class="btn btn-primary" role="button"> <span class="glyphicon glyphicon-picture"></span> 查看原图</a>
+                        <a href="/photo/map/{{p.id}}/" class="btn btn-default" role="button" title="在地图中定位图片">
+                            <span class="glyphicon glyphicon-globe"></span>
+                        </a>
+                    </p>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <nav aria-label="Page navigation">
+                <ul class="pagination">
+                    <li><a href="/attraction/album/{{provinceId}}/{{clusterId}}/1" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>
+                    {% for i in pageIndexs %}
+                    {% if i == pageNum %}
+                        <li class="active"><a href="/attraction/album/{{provinceId}}/{{clusterId}}/{{i}}">{{i}}</a></li>
+                    {% else %}
+                        <li><a href="/attraction/album/{{provinceId}}/{{clusterId}}/{{i}}">{{i}}</a></li>
+                    {% endif %}
+                    {% endfor %}
+                    <li><a href="/attraction/album/{{provinceId}}/{{clusterId}}/{{pageCount}}" aria-label="Next">共{{pageCount}}页 <span aria-hidden="true">&raquo;</span></a></li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

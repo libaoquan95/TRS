@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block title %}详细图片{% endblock %}
+
+{% block currentHeaderTag %} <li class="active"><a href="#">相册</a></li> {% endblock %}
+
+{% block headerUserName %}{{ uid }}{% endblock %}
+
+{% block mainBody %} 
+
+<div class="container mainBody">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="page-header">
+                <h1>详细图片 <small></small></h1>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="thumbnail">
+                <img src="{{ photo.imageUrl }}" alt="" onerror="javascript:this.src='/static/img/temp.svg';" class="">
+                <div class="caption">
+                    <p title="{{ photo.location }}" class="htmertext"><span class="glyphicon glyphicon-map-marker"></span> {{ photo.location }}</p>
+                    <p><span class="glyphicon glyphicon-user"></span> {{ photo.userName }}</p>
+                    <p><span class="glyphicon glyphicon-time"></span> {{ photo.takenDate }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+{% endblock %}
