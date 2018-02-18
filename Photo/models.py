@@ -16,6 +16,7 @@ class Photo(models.Model):
     provinceId    = models.IntegerField(null=True)                # 照片的拍摄地址的省位置
     location      = models.TextField(null=True)                   # 照片的拍摄地址
     isVideo       = models.BooleanField(default=False)            # 是否是视频
+    isDelete      = models.BooleanField(default=False)            # 是否删除
     #filePath      = models.CharField(max_length=255, null=True)   
     #photoFlikerId = models.CharField(max_length=20, null=True)    # 照片在fliker中的id
 
@@ -39,10 +40,10 @@ class Province(models.Model):
 def getPhotosByUser(userName, pageNum=0, limitCount=20):
     if limitCount == 0:
         results = Photo.objects.filter(userName=userName, isVideo=0).values_list('photoId', 'longitude',\
-             'latitude', 'userName', 'takenDate', 'location', 'pageURL', 'image').order_by('-takenDate')
+             'latitude', 'userName', 'takenDate', 'location', 'pageURL', 'image', 'isDelete').order_by('-takenDate')
     else:
         results = Photo.objects.filter(userName=userName, isVideo=0).values_list('photoId', 'longitude',\
-             'latitude', 'userName', 'takenDate', 'location', 'pageURL', 'image').order_by('-takenDate')\
+             'latitude', 'userName', 'takenDate', 'location', 'pageURL', 'image', 'isDelete').order_by('-takenDate')\
              [pageNum*limitCount:pageNum*limitCount+limitCount]
     
     photos = []
@@ -65,6 +66,7 @@ def getPhotosByUser(userName, pageNum=0, limitCount=20):
         else:
             from TRS import settings as setting
             temp['imageUrl'] = setting.MEDIA_URL + r[7]
+        temp['isDelete'] = r[8]
         photos.append(temp)
 
     return photos
@@ -97,7 +99,7 @@ def getProvinceById(provinceId):
 """
 def getPhotoById(photoId):
     results = Photo.objects.filter(photoId=photoId).values_list('userName','takenDate',\
-             'location','longitude','latitude', 'pageURL', 'image')
+             'location','longitude','latitude', 'pageURL', 'image', 'isDelete')
     
     photo = {}
     if results.exists():
@@ -118,6 +120,7 @@ def getPhotoById(photoId):
         else:
             from TRS import settings as setting
             photo['imageUrl'] = setting.MEDIA_URL + results[0][6]
+        photo['isDelete'] = results[0][7]
 
     return photo
     
@@ -162,3 +165,13 @@ def updatePhotoExifsById(photoId, photoExifs):
     else:
         newImg.location  = urllib.parse.quote(photoExifs['location'])
     newImg.save()
+
+""" 删除照片，假删除，修改 isDelete 属性
+@param
+    photoId: 照片id
+"""
+def deletePhotoById(photoId):
+    photo = Photo.objects.get(photoId=photoId)
+    #if photo.exists():
+    photo.isDelete = 1
+    photo.save()
