@@ -7,4 +7,4 @@
 >>> python manage.py runserver 0.0.0.0:8000
 ```
 
-*部分照片数据源自于 flick 数据集*
+*部分照片数据源自于 flickr 数据集*
