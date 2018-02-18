@@ -63,11 +63,11 @@
                     <p><span class="glyphicon glyphicon-user"></span> {{ p.userName }}</p>
                     <p><span class="glyphicon glyphicon-time"></span> {{ p.takenDate }}</p>
                     <p>
-                        <a href="/photo/map/{{p.id}}/" class="btn btn-info" role="button" data-toggle="tooltip" data-placement="top" title="在地图中定位图片">
-                            <span class="glyphicon glyphicon-globe"></span>
-                        </a>
                         <a href="/photo/{{p.id}}" class="btn btn-primary" role="button" data-toggle="tooltip" data-placement="top" title="查看大图"> 
                             <span class="glyphicon glyphicon-picture">
+                        </a>
+                        <a href="/photo/map/{{p.id}}/" class="btn btn-info" role="button" data-toggle="tooltip" data-placement="top" title="在地图中定位图片">
+                            <span class="glyphicon glyphicon-globe"></span>
                         </a>
                         <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deletePhotoModel{{p.id}}">
                             <span class="glyphicon glyphicon-trash"></span>
