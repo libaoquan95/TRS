@@ -18,6 +18,7 @@
             <div class="panel-heading">登录</div>
             <div class="panel-body">
                 <form action="/user/login/" method="post">
+                    {% csrf_token %}
                     <div class="form-group">
                         <label for="userName">用户名</label>
                         <input type="text" class="form-control" id="userName" name="userName" placeholder="请输入用户名">
@@ -29,7 +30,6 @@
                     <div class="form-group">
                         <a href="/user/register/">没有账号，去注册</a>
                     </div>
-                    {% csrf_token %}
                     <button type="submit" class="btn btn-primary text-right">登&nbsp;&nbsp;录</button>
                 </form>
             </div>
