@@ -39,8 +39,7 @@ def getPhotosByUser(request, pageNum):
         
         # 获取照片信息
         photos = photoModel.getPhotosByUser(uid, pageNum, limitCount)
-        context['photos'] = photos
-
+        context['photos'] = [p for p in photos if p['isDelete']==0]
 
         if request.GET.get('infoType') != None:
             context['hasInfo'] = True
@@ -125,12 +124,12 @@ def uploadPhoto(request):
                         photoTag['provinceId'] = None
                     # 存储照片的 exif 信息
                     photoModel.updatePhotoExifsById(newImgId, photoTag)
-                return HttpResponseRedirect('/photo/myphotos/1?infoType=success&uploadInfo=上传成功！')
+                return HttpResponseRedirect('/photo/list/1?infoType=success&uploadInfo=上传成功！')
             else:
-                return HttpResponseRedirect('/photo/myphotos/1?infoType=danger&uploadInfo=上传失败，无文件！', )
+                return HttpResponseRedirect('/photo/list/1?infoType=danger&uploadInfo=上传失败，无文件！', )
         else:
             context['hasInfo'] = False
-            return HttpResponseRedirect('/photo/myphotos/1/')
+            return HttpResponseRedirect('/photo/list/1/')
     else:
         return HttpResponseRedirect('/user/login')
 
@@ -170,3 +169,27 @@ def getLocation(coordinate):
                 pId = provinceId
                 break
         return address, pId
+
+""" 删除图片
+"""
+def deletePhotoById(request, photoId):
+    uid = userModel.currentUser(request)
+    
+    context = {}
+    if uid != None:
+        context['uid'] = uid
+
+        if request.method == 'POST':
+            # 获取待删除照片的信息
+            photo = photoModel.getPhotoById(photoId)
+            # 验证用户
+            if photo['userName'] == uid:
+                photoModel.deletePhotoById(photoId)
+                return HttpResponseRedirect('/photo/list/1?infoType=success&uploadInfo=操作成功！')
+            else:
+                return HttpResponseRedirect('/photo/list/1?infoType=danger&uploadInfo=操作失败，您没有权限删除非您上传的照片！', )
+        else:
+            context['hasInfo'] = False
+            return HttpResponseRedirect('/photo/list/1/')
+    else:
+        return HttpResponseRedirect('/user/login')
