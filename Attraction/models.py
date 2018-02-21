@@ -96,6 +96,18 @@ def getAttractionPhotoIds(provinceId, clusterId, pageNum, limitCount=20):
         photoIds.append(r[0])
     return photoIds
 
+""" 获取某景点的关联照片的数量
+@param
+    provinceId: 景点省份id
+    clusterId: 聚类id
+@return
+    照片的数量
+"""
+def getAttractionPhotosCount(provinceId, clusterId):
+    photosCount = PhotoAttraction.objects.filter(provinceId=provinceId, clusterId=clusterId).count()
+
+    return photosCount
+
 """ 获取某景点的所有关联照片id
 @param
     provinceId: 景点省份id

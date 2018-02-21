@@ -32,6 +32,8 @@ def recommend(request):
             tempDict['provinceName'] = photoModel.getProvinceById(a['provinceId'])
             tempDict['provinceId']   = a['provinceId']
             tempDict['clusterId']    = a['clusterId']
+            # 获取景点照片数量
+            tempDict['photosCount']  = attractionModel.getAttractionPhotosCount(a['provinceId'],a['clusterId'])
             # 获取此景点中的一张照片
             tempPhotoId = attractionModel.getAttractionPhotoIds(tempDict['provinceId'], tempDict['clusterId'], 1, 1)
             tempPhoto   = photoModel.getPhotoById(tempPhotoId[0])

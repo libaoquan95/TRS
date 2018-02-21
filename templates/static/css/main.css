@@ -28,5 +28,11 @@ footer {
 
 .miniImg {
     height: 200px!important;
-    width: 242px!important;
+    width: 100%!important;
+    border-radius: 0!important;
+    margin: 0!important;
+}
+
+.thumbnail {
+    padding: 0px!important;
 }

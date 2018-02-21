@@ -22,7 +22,7 @@
             <div class="thumbnail">
                 <img src="{{ a.imageUrl }}" alt="" onerror="javascript:this.src='/static/img/temp.svg';" class="miniImg img-rounded">
                 <div class="caption">
-                    <h4><span class="glyphicon glyphicon-map-marker"></span> {{ a.provinceName }}</h4>
+                    <h4><span class="glyphicon glyphicon-map-marker"></span> {{ a.provinceName }} <span class="badge">{{ a.photosCount }}</span></h4>
                     <p>
                         <a href="/attraction/album/{{a.provinceId}}/{{a.clusterId}}/1" class="btn btn-primary" role="button" data-toggle="tooltip" data-placement="top"  title="景点相册">
                             <span class="glyphicon glyphicon-folder-open"></span>
