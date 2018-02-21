@@ -65,13 +65,18 @@ def getAttractionByUser(userName, limitCount=10):
     provinceId: 景点省份id
     clusterId: 聚类id
     limitCount: 数量
+    limitProvinceId: 限定相似景点的地区，为0不限定地区
 @return
     相似景点(provinceId, clusterId)的数组
 """
-def getSimAttraction(provinceId, clusterId, limitCount=10):
-    results = AttractionSimilarityMatrix.objects.filter(province1Id=provinceId, \
-              cluster1Id=clusterId).values_list('province2Id', 'cluster2Id').order_by('-similarity')[:limitCount]
-    
+def getSimAttraction(provinceId, clusterId, limitCount=10, limitProvinceId=0):
+    if limitProvinceId == 0:
+        results = AttractionSimilarityMatrix.objects.filter(province1Id=provinceId, \
+                  cluster1Id=clusterId).values_list('province2Id', 'cluster2Id').order_by('-similarity')[:limitCount]
+    else:
+        results = AttractionSimilarityMatrix.objects.filter(province1Id=provinceId, \
+                  cluster1Id=clusterId, province2Id=limitProvinceId).values_list('province2Id', 'cluster2Id').order_by('-similarity')[:limitCount]
+
     simAttractions = []
     for r in results:
         temp = {}

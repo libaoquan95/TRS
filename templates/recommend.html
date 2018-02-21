@@ -12,7 +12,25 @@
     <div class="row">
         <div class="col-md-12">
             <div class="page-header">
-                <h1>推荐景点<small></small></h1>
+                <h1>推荐景点
+                    <small>
+                        <!-- Split button -->
+<div class="btn-group">
+    <button type="button" class="btn btn-default">{{ recommendArea }}</button>
+    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    <span class="caret"></span>
+    <span class="sr-only">Toggle Dropdown</span>
+    </button>
+    <ul class="dropdown-menu">
+        <li><a href="/attraction/recommend/0">全国</a></li>
+        <li role="separator" class="divider"></li>
+        {% for p in provinces %}
+        <li><a href="/attraction/recommend/{{p.id}}">{{p.name}}</a></li>
+        {% endfor %}
+    </ul>
+</div>       
+                    </small>
+                </h1>
             </div>
         </div>
     </div>

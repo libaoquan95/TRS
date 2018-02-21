@@ -8,7 +8,7 @@ import math
 # Create your views here.
 """ 获取推荐的景点信息
 """
-def recommend(request):
+def recommend(request, provinceId):
     uid = userModel.currentUser(request)
     
     context = {}
@@ -19,7 +19,7 @@ def recommend(request):
         attractioms = attractionModel.getAttractionByUser(uid, 10)
         for a in attractioms:
             # 获取景点的相似景点
-            oneSimAtt = attractionModel.getSimAttraction(a['provinceId'], a['clusterId'], 5)
+            oneSimAtt = attractionModel.getSimAttraction(a['provinceId'], a['clusterId'], 5, provinceId)
             for s in oneSimAtt:
                 # 相似景点不重复且不再用户的关联景点中
                 if s not in simAttractions or s not in attractioms:
@@ -40,9 +40,17 @@ def recommend(request):
             tempDict['imageUrl'] = tempPhoto['imageUrl']
             attractions.append(tempDict)
         context['attractions'] = attractions
+
+        if provinceId == 0:
+            context['recommendArea'] = '全国'
+        else:
+            context['recommendArea'] = photoModel.getProvinceById(provinceId)
+        # 获取省份信息
+        context['provinces'] = photoModel.getAllProvinceNameAndId()
         return render(request, 'recommend.html', context)
     else:
         return HttpResponseRedirect('/user/login')
+
 
 """ 获取景点关联的照片信息
 """

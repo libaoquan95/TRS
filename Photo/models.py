@@ -149,6 +149,20 @@ def getAllProvince():
     provinces['廣東省'] = provinces['广东省']
     return provinces
 
+""" 获取省份名和id
+@return
+    数组形式，每个元素输一个字典 {省份名，省份id}
+"""
+def getAllProvinceNameAndId():
+    results = Province.objects.all().values_list('provinceId','provinceName').order_by('pingyingName')
+    provinces = []
+    for r in results:
+        temp = {}
+        temp['id'] = r[0]
+        temp['name'] = r[1]
+        provinces.append(temp)
+    return provinces
+
 """ 更新照片 exif 信息
 @param
     photoId: 照片id
