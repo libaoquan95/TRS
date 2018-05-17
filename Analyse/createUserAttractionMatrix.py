@@ -116,9 +116,8 @@ def main(PhotoFile, photoUserFie, photoAttractionFile, userAttractionFile, provi
     countToRating(userAttractionFile)
     print ("统计评分完成")
 
-    
     p1 = pd.read_csv(phontUserFile)
-    userCount = len(p1.drop_duplicates('USER_NAME'))
+    userCount = len(p1.drop_duplicates('userName'))
     p1 = pd.read_csv(phontAttractionFile)
     attractionCount = len(p1.drop_duplicates(['clusterId', 'province']))
     print ('用户数量：%d，景点数量：%d' % (userCount, attractionCount-34))
