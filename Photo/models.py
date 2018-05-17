@@ -40,10 +40,10 @@ class Province(models.Model):
 def getPhotosByUser(userName, pageNum=0, limitCount=20):
     if limitCount == 0:
         results = Photo.objects.filter(userName=userName, isVideo=0).values_list('photoId', 'longitude',\
-             'latitude', 'userName', 'takenDate', 'location', 'pageURL', 'image', 'isDelete').order_by('-takenDate')
+             'latitude', 'userName', 'takenDate', 'location', 'downloadURL', 'image', 'isDelete').order_by('-takenDate')
     else:
         results = Photo.objects.filter(userName=userName, isVideo=0).values_list('photoId', 'longitude',\
-             'latitude', 'userName', 'takenDate', 'location', 'pageURL', 'image', 'isDelete').order_by('-takenDate')\
+             'latitude', 'userName', 'takenDate', 'location', 'downloadURL', 'image', 'isDelete').order_by('-takenDate')\
              [pageNum*limitCount:pageNum*limitCount+limitCount]
     
     photos = []
@@ -99,7 +99,7 @@ def getProvinceById(provinceId):
 """
 def getPhotoById(photoId):
     results = Photo.objects.filter(photoId=photoId).values_list('userName','takenDate',\
-             'location','longitude','latitude', 'pageURL', 'image', 'isDelete')
+             'location','longitude','latitude', 'downloadURL', 'image', 'isDelete')
     
     photo = {}
     if results.exists():
