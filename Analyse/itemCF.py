@@ -116,7 +116,6 @@ class ItemBasedCF(object):
         simData = np.array(simData)
         data = {'attraction1':simData[:, 0], 'attraction2':simData[:, 1], 'similarity': simData[:, 2]}
         df = pd.DataFrame(data, columns=['attraction1', 'attraction2', 'similarity'])
-        print(df)
         df.to_csv(model, encoding='utf-8', index=False)
 
     def loadAttractionSimMatrix():
