@@ -121,3 +121,4 @@ def main(PhotoFile, photoUserFile, photoAttractionFile, userAttractionFile, prov
     p1 = pd.read_csv(photoAttractionFile)
     attractionCount = len(p1.drop_duplicates(['clusterId', 'province']))
     print ('用户数量：%d，景点数量：%d' % (userCount, attractionCount-34))
+    # 用户数量：10079，景点数量：5153
