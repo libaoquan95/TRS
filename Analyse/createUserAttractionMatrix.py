@@ -99,25 +99,25 @@ def statistics(userAttractionFile, statisticsFile):
     
     attractionIdsGroup.count().to_csv(statisticsFile, encoding='utf-8', index=False)
 
-def main(PhotoFile, photoUserFie, photoAttractionFile, userAttractionFile, provinceFile, culsterFiles):
+def main(PhotoFile, photoUserFile, photoAttractionFile, userAttractionFile, provinceFile, culsterFiles):
     
     # 读取数据集
     dataSets = pd.read_csv(PhotoFile, index_col=0)
 
-    createPhotoUserMatrix(dataSets, photoUserFie)
+    createPhotoUserMatrix(dataSets, photoUserFile)
     print ("构建照片-用户关联矩阵完成")
     
     createPhotoAttractionMatrix(provinceFile, culsterFiles, photoAttractionFile)
     print ("构建照片-景点关联矩阵完成")
     
-    createUserAttractionMatrix(photoAttractionFile, photoUserFie, userAttractionFile)
+    createUserAttractionMatrix(photoAttractionFile, photoUserFile, userAttractionFile)
     print ("构建用户-景点矩阵完成")
     
     countToRating(userAttractionFile)
     print ("统计评分完成")
 
-    p1 = pd.read_csv(phontUserFile)
+    p1 = pd.read_csv(photoUserFile)
     userCount = len(p1.drop_duplicates('userName'))
-    p1 = pd.read_csv(phontAttractionFile)
+    p1 = pd.read_csv(photoAttractionFile)
     attractionCount = len(p1.drop_duplicates(['clusterId', 'province']))
     print ('用户数量：%d，景点数量：%d' % (userCount, attractionCount-34))
