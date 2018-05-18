@@ -193,3 +193,40 @@ def deletePhotoById(request, photoId):
             return HttpResponseRedirect('/photo/list/1/')
     else:
         return HttpResponseRedirect('/user/login')
+
+# 按地址搜索图片
+def searchPhotoByLocation(request):
+    uid = userModel.currentUser(request)
+    
+    context = {}
+    if uid != None:
+        # 搜索信息
+        searchInfo = request.GET['searchInfo'].strip()
+        pageNum = int(request.GET['page'].strip())-1
+        photos = photoModel.searchPhotoByLocation(searchInfo, pageNum, 20)
+        context['photos'] = photos
+        context['searchInfo'] = searchInfo
+        
+        context['pageNum'] = pageNum+1
+        # 获取页数
+        photoCount = photoModel.getSearchPhotoCount(searchInfo)
+        limitCount = 20
+        pageLimit = 8
+        pageCount = math.ceil(photoCount/limitCount)
+        context['count'] = photoCount
+        context['pageCount'] = pageCount
+
+        # 设置页码信息
+        pageStart = max(1, pageNum-pageLimit)
+        pageEnd = min(pageCount, pageNum+pageLimit)
+        i = pageStart
+        pageIndexs = []
+        while i <= pageEnd:
+            pageIndexs.append(i)
+            i = i + 1
+        context['pageIndexs'] = pageIndexs
+
+        return render(request, 'search_result.html', context)
+
+    else:
+        return HttpResponseRedirect('/user/login')

@@ -189,3 +189,43 @@ def deletePhotoById(photoId):
     #if photo.exists():
     photo.isDelete = 1
     photo.save()
+
+""" 按location信息搜索照片
+@param
+    searchInfo: 搜索关键字
+"""
+def getSearchPhotoCount(searchInfo):
+    searchInfoBaseURLCode = urllib.parse.quote(searchInfo)
+    photosCount = Photo.objects.filter(location__icontains=searchInfoBaseURLCode).count()
+    return photosCount
+
+def searchPhotoByLocation(searchInfo, pageNum, limitCount=20):
+    searchInfoBaseURLCode = urllib.parse.quote(searchInfo)
+    results = Photo.objects.filter(location__icontains=searchInfoBaseURLCode).values_list('photoId', 'longitude',\
+             'latitude', 'userName', 'takenDate', 'location', 'downloadURL', 'image', 'isDelete')\
+             [pageNum*limitCount:pageNum*limitCount+limitCount]
+
+    photos = []
+    for r in results:
+        temp = {}
+        temp['id'] = r[0]
+        temp['longitude'] = r[1]
+        temp['latitude'] = r[2]
+        temp['userName'] = r[3]
+        if r[4] == '' or r[4] == None:
+            temp['takenDate'] = '无时间信息'
+        else:
+            temp['takenDate'] = r[4][:16]
+        if r[5] == '' or r[5] == None:
+            temp['location'] = '无位置信息'
+        else:
+            temp['location'] = urllib.parse.unquote(r[5])
+        if(r[7] == '' or r[7] == None):
+            temp['imageUrl'] = r[6]
+        else:
+            from TRS import settings as setting
+            temp['imageUrl'] = setting.MEDIA_URL + r[7]
+        temp['isDelete'] = r[8]
+        photos.append(temp)
+
+    return photos

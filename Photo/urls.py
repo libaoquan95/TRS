@@ -9,4 +9,5 @@ urlpatterns = [
     path('map/<int:photoId>/', photoView.getPhotoGeoById),
     path('delete/<int:photoId>/', photoView.deletePhotoById),
     path('<int:photoId>/', photoView.getPhotoById),
+    path('search/', photoView.searchPhotoByLocation),
 ]
