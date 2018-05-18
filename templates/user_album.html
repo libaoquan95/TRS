@@ -59,7 +59,7 @@
             <div class="thumbnail">
                 <img src="{{ p.imageUrl }}" alt="" onerror="javascript:this.src='/static/img/temp.svg';" class="miniImg img-rounded">
                 <div class="caption">
-                    <p title="{{ p.location }}" class="htmertext"><span class="glyphicon glyphicon-map-marker"></span> {{ p.location }}</p>
+                    <p data-toggle="tooltip" data-placement="top" title="{{ p.location }}" class="htmertext"><span class="glyphicon glyphicon-map-marker"></span> {{ p.location }}</p>
                     <p><span class="glyphicon glyphicon-user"></span> {{ p.userName }}</p>
                     <p><span class="glyphicon glyphicon-time"></span> {{ p.takenDate }}</p>
                     <p>

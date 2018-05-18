@@ -22,7 +22,7 @@
             <div class="thumbnail">
                 <img src="{{ photo.imageUrl }}" alt="" onerror="javascript:this.src='/static/img/temp.svg';" class="">
                 <div class="caption">
-                    <p title="{{ photo.location }}" class="htmertext"><span class="glyphicon glyphicon-map-marker"></span> {{ photo.location }}</p>
+                    <p data-toggle="tooltip" data-placement="top" title="{{ photo.location }}" class="htmertext"><span class="glyphicon glyphicon-map-marker"></span> {{ photo.location }}</p>
                     <p><span class="glyphicon glyphicon-user"></span> {{ photo.userName }}</p>
                     <p><span class="glyphicon glyphicon-time"></span> {{ photo.takenDate }}</p>
                 </div>
