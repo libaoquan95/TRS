@@ -59,8 +59,15 @@ def getPhotosByUser(userName, pageNum=0, limitCount=20):
             temp['takenDate'] = r[4][:16]
         if r[5] == '' or r[5] == None:
             temp['location'] = '无位置信息'
+            temp['locationName'] = '无位置信息'
         else:
             temp['location'] = urllib.parse.unquote(r[5])
+            tempname = temp['location'].split(" ")
+            temp['locationName'] = temp['location'].split(" ")[0]
+            for i in range(len(tempname)):
+                if is_chinese(tempname[i][0]):
+                    temp['locationName'] = tempname[i]
+                    break
         if(r[7] == '' or r[7] == None):
             temp['imageUrl'] = r[6]
         else:
@@ -111,8 +118,15 @@ def getPhotoById(photoId):
             photo['takenDate'] = results[0][1][:16]
         if results[0][2] == '' or results[0][2] == None:
             photo['location'] = '无位置信息'
+            photo['locationName'] = '无位置信息'
         else:
             photo['location'] = urllib.parse.unquote(results[0][2])
+            tempname = photo['location'].split(" ")
+            photo['locationName'] = photo['location'].split(" ")[0]
+            for i in range(len(tempname)):
+                if is_chinese(tempname[i][0]):
+                    photo['locationName'] = tempname[i]
+                    break
         photo['longitude'] = results[0][3]
         photo['latitude'] = results[0][4]
         if(results[0][6] == '' or results[0][6] == None):
@@ -218,8 +232,15 @@ def searchPhotoByLocation(searchInfo, pageNum, limitCount=20):
             temp['takenDate'] = r[4][:16]
         if r[5] == '' or r[5] == None:
             temp['location'] = '无位置信息'
+            temp['locationName'] = '无位置信息'
         else:
             temp['location'] = urllib.parse.unquote(r[5])
+            tempname = temp['location'].split(" ")
+            temp['locationName'] = temp['location'].split(" ")[0]
+            for i in range(len(tempname)):
+                if is_chinese(tempname[i][0]):
+                    temp['locationName'] = tempname[i]
+                    break
         if(r[7] == '' or r[7] == None):
             temp['imageUrl'] = r[6]
         else:
@@ -229,3 +250,14 @@ def searchPhotoByLocation(searchInfo, pageNum, limitCount=20):
         photos.append(temp)
 
     return photos
+
+"""汉字处理的工具:
+判断unicode是否是汉字，数字，英文，或者其他字符。
+全角符号转半角符号。
+"""
+def is_chinese(uchar):
+    """判断一个unicode是否是汉字"""
+    if uchar >= u'\u4e00' and uchar<=u'\u9fa5':
+        return True
+    else:
+        return False
