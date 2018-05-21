@@ -20,7 +20,7 @@
     <div class="row">
         {% for p in photos %}
         <div class="col-md-3">
-            <div class="thumbnail">
+            <div class="thumbnail cardShadow">
                 <img src="{{ p.imageUrl }}" alt="" onerror="javascript:this.src='/static/img/temp.svg';" class="miniImg img-rounded">
                 <div class="caption">
                     <h4> {{ p.locationName }}</h4>
