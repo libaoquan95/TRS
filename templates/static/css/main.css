@@ -46,3 +46,40 @@ footer {
 .iconS{
     color:#8BC34A;
 }
+
+.greyInput{
+    background-color: #3f4448;
+    border: 1px solid #3f4448;
+    color: #fff;
+}
+
+.cardButtomArea{
+    text-align: center;
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
+
+
+.colorDefault{
+    color:#999;
+}
+.colorPrimary{
+    color:#3073ad;
+}
+.colorSuccess{
+    color:#51ab51;
+}
+.colorInfo{
+    color:#46b7d9;
+}
+.colorWarning{
+    color:#ed9d2c;
+}
+.colorDanger{
+    color:#cc3e3a;
+    background-color: #fff;
+}
+
+h4{
+    margin-bottom: 20px;
+}

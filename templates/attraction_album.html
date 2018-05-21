@@ -23,12 +23,15 @@
             <div class="thumbnail">
                 <img src="{{ p.imageUrl }}" alt="" onerror="javascript:this.src='/static/img/temp.svg';" class="miniImg img-rounded">
                 <div class="caption">
-                    <p data-toggle="tooltip" data-placement="top" title="{{ p.location }}" class="htmertext"><span class="glyphicon glyphicon-map-marker"></span> {{ p.location }}</p>
-                    <p><span class="glyphicon glyphicon-user"></span> {{ p.userName }}</p>
-                    <p><span class="glyphicon glyphicon-time"></span> {{ p.takenDate }}</p>
-                    <p>
-                        <a href="/photo/{{p.id}}/" class="btn btn-primary" role="button" data-toggle="tooltip" data-placement="top" title="查看大图"> <span class="glyphicon glyphicon-picture"></span></a>
-                        <a href="/photo/map/{{p.id}}/" class="btn btn-info" role="button" data-toggle="tooltip" data-placement="top" title="在地图中定位图片">
+                    <h4> {{ p.locationName }}</h4>
+                    <p> </p>
+                    <p data-toggle="tooltip" data-placement="top" title="{{ p.location }}" class="htmertext"><span class="glyphicon glyphicon-map-marker colorDefault"></span> <span class="colorDefault">{{ p.location }}</span></p>
+                    <p><span class="glyphicon glyphicon-user colorDefault"></span> <span class="colorDefault">{{ p.userName }}</span></p>
+                    <p><span class="glyphicon glyphicon-time colorDefault"></span> <span class="colorDefault">{{ p.takenDate }}</span></p>
+                    <p class="cardButtomArea">
+                        <a href="/photo/{{p.id}}/" class="btn btn-lg colorPrimary" role="button" data-toggle="tooltip" data-placement="top" title="查看大图"> <span class="glyphicon glyphicon-picture"></span></a>
+                        |
+                        <a href="/photo/map/{{p.id}}/" class="btn btn-lg colorInfo" role="button" data-toggle="tooltip" data-placement="top" title="在地图中定位图片">
                             <span class="glyphicon glyphicon-globe"></span>
                         </a>
                     </p>
