@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ExternalStorageConfigurationManager" enabled="true" />
+  <component name="MavenProjectsManager">
+    <option name="originalFiles">
+      <list>
+        <option value="$PROJECT_DIR$/pom.xml" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/out" />
+  </component>
+  <component name="libraryTable">
+    <library name="scala-sdk-2.11.12 (2)" type="Scala">
+      <properties>
+        <compiler-classpath>
+          <root url="file://D:/Applications/scala/lib/scala-compiler.jar" />
+          <root url="file://D:/Applications/scala/lib/scala-library.jar" />
+          <root url="file://D:/Applications/scala/lib/scala-reflect.jar" />
+        </compiler-classpath>
+      </properties>
+      <CLASSES>
+        <root url="jar://D:/Applications/scala/lib/scala-actors-2.11.0.jar!/" />
+        <root url="jar://D:/Applications/scala/lib/scala-actors-migration_2.11-1.1.0.jar!/" />
+        <root url="jar://D:/Applications/scala/lib/scala-library.jar!/" />
+        <root url="jar://D:/Applications/scala/lib/scala-parser-combinators_2.11-1.0.4.jar!/" />
+        <root url="jar://D:/Applications/scala/lib/scala-reflect.jar!/" />
+        <root url="jar://D:/Applications/scala/lib/scala-swing_2.11-1.0.2.jar!/" />
+        <root url="jar://D:/Applications/scala/lib/scala-xml_2.11-1.0.5.jar!/" />
+      </CLASSES>
+      <JAVADOC>
+        <root url="jar://D:/Applications/scala/api/jars/scala-actors-2.11.0-javadoc.jar!/" />
+        <root url="jar://D:/Applications/scala/api/jars/scala-actors-migration_2.11-1.1.0-javadoc.jar!/" />
+        <root url="jar://D:/Applications/scala/api/jars/scala-library-2.11.12-javadoc.jar!/" />
+        <root url="jar://D:/Applications/scala/api/jars/scala-parser-combinators_2.11-1.0.4-javadoc.jar!/" />
+        <root url="jar://D:/Applications/scala/api/jars/scala-reflect-2.11.12-javadoc.jar!/" />
+        <root url="jar://D:/Applications/scala/api/jars/scala-swing_2.11-1.0.2-javadoc.jar!/" />
+        <root url="jar://D:/Applications/scala/api/jars/scala-xml_2.11-1.0.5-javadoc.jar!/" />
+      </JAVADOC>
+      <SOURCES />
+    </library>
+  </component>
+</project>
