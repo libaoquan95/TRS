@@ -24,8 +24,8 @@
       <file leaf-file-name="recommend.scala" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/scala/net/libaoquan/trs/recommend/recommend.scala">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="111">
-              <caret line="109" column="25" selection-start-line="109" selection-start-column="25" selection-end-line="109" selection-end-column="25" />
+            <state relative-caret-position="-290">
+              <caret line="175" lean-forward="true" selection-start-line="175" selection-end-line="190" selection-end-column="21" />
               <folding>
                 <element signature="e#37#73#0" expanded="true" />
                 <element signature="e#627#1092#0" />
@@ -210,12 +210,12 @@
       <option name="presentableId" value="Default" />
       <updated>1527860717187</updated>
       <workItem from="1527860720440" duration="2276000" />
-      <workItem from="1527904111807" duration="14130000" />
+      <workItem from="1527904111807" duration="22964000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="16406000" />
+    <option name="totallyTimeSpent" value="25240000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-5" y="0" width="1125" height="830" extended-state="0" />
@@ -223,7 +223,7 @@
     <layout>
       <window_info anchor="right" id="Palette" order="3" />
       <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="bottom" id="Messages" order="7" weight="0.32962447" />
+      <window_info anchor="bottom" id="Messages" order="7" weight="0.32914925" />
       <window_info anchor="right" id="Palette&#9;" order="3" />
       <window_info id="Image Layers" order="2" />
       <window_info anchor="bottom" id="Java Enterprise" order="7" />
@@ -232,7 +232,7 @@
       <window_info anchor="right" id="Maven Projects" order="3" />
       <window_info anchor="bottom" id="Database Changes" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="7" show_stripe_button="false" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.34728032" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.29986054" />
       <window_info anchor="bottom" id="Terminal" order="7" />
       <window_info id="Capture Tool" order="2" />
       <window_info id="Designer" order="2" />
@@ -288,8 +288,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/scala/net/libaoquan/trs/recommend/recommend.scala">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="111">
-          <caret line="109" column="25" selection-start-line="109" selection-start-column="25" selection-end-line="109" selection-end-column="25" />
+        <state relative-caret-position="-290">
+          <caret line="175" lean-forward="true" selection-start-line="175" selection-end-line="190" selection-end-column="21" />
           <folding>
             <element signature="e#37#73#0" expanded="true" />
             <element signature="e#627#1092#0" />

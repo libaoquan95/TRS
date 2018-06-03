@@ -7,6 +7,7 @@ import scala.collection.mutable.ArrayBuffer
 import scala.util.Random
 import org.apache.spark.broadcast.Broadcast
 import org.apache.spark.ml.recommendation.{ALS, ALSModel}
+import org.apache.spark.rdd.RDD
 import org.apache.spark.sql.{DataFrame, Dataset, SparkSession}
 import org.apache.spark.sql.functions._
 
@@ -171,6 +172,39 @@ object recommend {
       recommends.map(line => decodeing(line.toString))
     }
 
-    recommendByUser(1, 10).map(println)
+    // 测试推荐效果
+    def testRecommend(): Double ={
+      val topN = 10
+      val users = cvData.select($"user").distinct().collect().map(u => u(0))
+      var hit = 0.0
+      var rec_count = 0.0
+
+      for (i <- 0 to users.length-1) {
+        val recs = recommendByUser(users(i).toString.toInt, topN).toSet
+        val temp = trainData.select($"attraction").
+          where($"user" === users(i).toString.toInt).
+          collect().map(a => decodeing(a(0).toString)).
+          toSet
+        hit += recs.&(temp).size
+        rec_count += recs.size
+      }
+      hit / rec_count
+      /*
+      val recHit = cvData.select($"user").distinct().map{ user =>
+        val recs = recommendByUser(user.getInt(0), topN).toSet
+        val temp = trainData.select($"attraction").
+          where($"user" === user.getInt(0)).
+          collect().map(a => decodeing(a(0).toString)).
+          toSet
+        recs.&(temp).size
+      }
+
+      val recNum = recHit.reduce(_+_)
+
+      recNum / topN * recHit.count()
+      */
+    }
+
+    testRecommend()
   }
 }
