@@ -117,31 +117,36 @@ class ItemBasedCF(object):
         data = {'attraction1':simData[:, 0], 'attraction2':simData[:, 1], 'similarity': simData[:, 2]}
         df = pd.DataFrame(data, columns=['attraction1', 'attraction2', 'similarity'])
         df.to_csv(model, encoding='utf-8', index=False)
-
+        
+    """
     def loadAttractionSimMatrix():
         ''' 加载相似度矩阵 '''
         return
-    
+    """
+
     def recommend(self, user):
         ''' Find K similar attrictions and recommend N attrictions. '''
         K = self.nSimAttraction
         N = self.nRecAttraction
         rank = {}
-        watched_attrictions = self.trainset[user]
-        try:
-            for attriction, rating in watched_attrictions.items():
-                for related_attriction, similarity_factor in sorted(self.attractionSimMatrix[attriction].items(),
-                                                               key=itemgetter(1), reverse=True)[:K]:
-                    if related_attriction in watched_attrictions:
-                        continue
-                    rank.setdefault(related_attriction, 0)
-                    rank[related_attriction] += similarity_factor * rating
-        except KeyError:
-            #print ('catch an exception')
-            c = 1
-            
-        # return the N best attrictions
-        return sorted(rank.items(), key=itemgetter(1), reverse=True)[:N]
+        if user in self.trainset:
+            watched_attrictions = self.trainset[user]
+            try:
+                for attriction, rating in watched_attrictions.items():
+                    for related_attriction, similarity_factor in sorted(self.attractionSimMatrix[attriction].items(),
+                                                                   key=itemgetter(1), reverse=True)[:K]:
+                        if related_attriction in watched_attrictions:
+                            continue
+                        rank.setdefault(related_attriction, 0)
+                        rank[related_attriction] += similarity_factor * rating
+            except KeyError:
+                #print ('catch an exception')
+                c = 1
+                
+            # return the N best attrictions
+            return sorted(rank.items(), key=itemgetter(1), reverse=True)[:N]
+        else:
+            return []
 
     def evaluate(self):
         ''' 显示评估结果: precision, recall, coverage and popularity '''
@@ -161,7 +166,8 @@ class ItemBasedCF(object):
         # varables for popularity
         popular_sum = 0
 
-        for i, user in enumerate(self.trainset):
+        '''
+        for i, user in enumerate(self.testset):
             if i % 500 == 0:
                 print ('recommended for %d users' % i, file=sys.stderr)
             test_attrictions = self.testset.get(user, {})
@@ -181,7 +187,20 @@ class ItemBasedCF(object):
 
         print ('准确率=%.4f\n召回率=%.4f\n覆盖率=%.4f\n流行度=%.4f' %
                (precision, recall, coverage, popularity), file=sys.stderr)
-
+        '''
+        for i, user in enumerate(self.testset):
+            if i % 500 == 0:
+                print ('recommended for %d users' % i, file=sys.stderr)
+            test_attrictions = self.testset.get(user, {})
+            rec_attrictions = self.recommend(user)
+            for attriction, _ in rec_attrictions:
+                if attriction in test_attrictions:
+                    hit += 1
+                    break
+                
+        rec_count = len(self.testset)
+        precision = hit / (1.0 * rec_count)
+        print ("命中率: %.4f" % precision, file=sys.stderr)
 
 if __name__ == '__main__':
     
@@ -192,4 +211,5 @@ if __name__ == '__main__':
     itemcf.generateDataset(userAttractionFile)
     itemcf.calculateAttractionSim()
     itemcf.evaluate()
+    #itemcf.ev()
     
