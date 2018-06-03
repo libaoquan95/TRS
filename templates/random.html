@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+
+{% block title %}随便看看{% endblock %}
+
+{% block randomHeaderTag %}class="active"{% endblock %}
+
+{% block headerUserName %}{{ uid }}{% endblock %}
+
+{% block mainBody %} 
+
+<div class="container mainBody">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="page-header">
+                <h1>随便看看
+                    <small>
+                        <!-- Split button -->
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-default">{{ recommendArea }}</button>
+                            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <span class="caret"></span>
+                            <span class="sr-only">Toggle Dropdown</span>
+                            </button>
+                            <ul class="dropdown-menu">
+                                <!--<li><a href="/attraction/recommend/0">全国</a></li>-->
+                                <li role="separator" class="divider"></li>
+                                {% for p in provinces %}
+                                <li><a href="/attraction/recommend/{{p.id}}">{{p.name}}</a></li>
+                                {% endfor %}
+                            </ul>
+                        </div>      
+                    </small>
+                </h1>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        {% for a in attractions%}
+        <div class="col-md-3">
+            <div class="thumbnail cardShadow">
+                <img src="{{ a.imageUrl }}" alt="" onerror="javascript:this.src='/static/img/temp.svg';" class="miniImg img-rounded">
+                <div class="caption">
+                    <h4><span class="glyphicon glyphicon-map-marker"></span> {{ a.provinceName }}</h4>
+                    <p><span class="glyphicon  colorDefault"></span> <span class="colorDefault">{{ a.photosCount }} 张图片</span></p>
+                    <p class="cardButtomArea">
+                        <a href="/attraction/album/{{a.provinceId}}/{{a.clusterId}}/1" class="btn btn-lg colorPrimary" role="button" data-toggle="tooltip" data-placement="top"  title="景点相册">
+                            <span class="glyphicon glyphicon-folder-open"></span>
+                        </a>
+                        <span class="colorDefault">|</span>
+                        <a href="/attraction/map/{{a.provinceId}}/{{a.clusterId}}" class="btn btn-lg colorInfo" role="button" data-toggle="tooltip" data-placement="top" title="景点地图">
+                            <span class="glyphicon glyphicon-globe"></span>
+                        </a>
+                    </p>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock %}

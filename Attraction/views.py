@@ -112,3 +112,40 @@ def AttractionMap(request, provinceId, clusterId):
         return render(request, 'attraction_map.html', context)
     else:
         return HttpResponseRedirect('/user/login')
+
+""" 随机推荐
+"""
+def random(request, provinceId):
+    uid = userModel.currentUser(request)
+    context = {}
+    if uid != None:
+        context['uid'] = uid
+        simAttractions = []
+        simAttractions = attractionModel.getRandomAttraction(provinceId, 12)
+        # 根据景点id获取景点信息
+        attractions = []
+        for a in simAttractions:
+            tempDict = {}
+            tempDict['provinceName'] = photoModel.getProvinceById(a['provinceId'])
+            tempDict['provinceId']   = a['provinceId']
+            tempDict['clusterId']    = a['clusterId']
+            # 获取景点照片数量
+            tempDict['photosCount']  = attractionModel.getAttractionPhotosCount(a['provinceId'],a['clusterId'])
+            # 获取此景点中的一张照片
+            tempPhotoId = attractionModel.getAttractionPhotoIds(tempDict['provinceId'], tempDict['clusterId'], 1, 1)
+            tempPhoto   = photoModel.getPhotoById(tempPhotoId[0])
+            tempDict['imageUrl'] = tempPhoto['imageUrl']
+            attractions.append(tempDict)
+        context['attractions'] = attractions
+        """
+        if provinceId == 0:
+            context['recommendArea'] = '全国'
+        else:
+            context['recommendArea'] = photoModel.getProvinceById(provinceId)
+        """
+        context['recommendArea'] = photoModel.getProvinceById(provinceId)
+        # 获取省份信息
+        context['provinces'] = photoModel.getAllProvinceNameAndId()
+        return render(request, 'random.html', context)
+    else:
+        return HttpResponseRedirect('/user/login')

@@ -1,4 +1,5 @@
 from django.db import models
+import random
 
 # Create your models here.
 class Attraction(models.Model):
@@ -138,3 +139,25 @@ def getAllAttractionPhotoIds(provinceId, clusterId):
 def getAttractionPhotosCount(provinceId, clusterId):
     results = PhotoAttraction.objects.filter(provinceId=provinceId, clusterId=clusterId).count()
     return results
+
+"""
+"""
+def getRandomAttraction(provinceId, limitCount=30):
+    if provinceId == 0:
+        simAttractions = []
+    else:
+        attCount = AttractionSimilarityMatrix.objects.filter(province1Id=provinceId).\
+                   values_list("cluster1Id").distinct().count()
+        randomatts = []
+        if limitCount < attCount:
+            randomatts = random.sample(range(0, attCount), limitCount)
+        else:
+            randomatts = random.sample(range(0, attCount), attCount)
+
+        simAttractions = []
+        for i in range(len(randomatts)):
+            temp = {}
+            temp['provinceId'] = provinceId
+            temp['clusterId']  = randomatts[i]
+            simAttractions.append(temp)
+    return simAttractions

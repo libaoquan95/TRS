@@ -7,4 +7,5 @@ urlpatterns = [
     path('recommend/<int:provinceId>', attractionView.recommend),
     path('album/<int:provinceId>/<int:clusterId>/<int:pageNum>', attractionView.AttractionAlbum),
     path('map/<int:provinceId>/<int:clusterId>', attractionView.AttractionMap),
+    path('random/<int:provinceId>', attractionView.random)
 ]
