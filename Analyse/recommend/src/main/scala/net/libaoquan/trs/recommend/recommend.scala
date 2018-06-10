@@ -173,22 +173,25 @@ object recommend {
     }
 
     // 测试推荐效果
-    def testRecommend(): Double ={
+    def testRecommend(): Unit ={
       val topN = 10
       val users = cvData.select($"user").distinct().collect().map(u => u(0))
       var hit = 0.0
       var rec_count = 0.0
+      var test_count = 0.0
 
       for (i <- 0 to users.length-1) {
         val recs = recommendByUser(users(i).toString.toInt, topN).toSet
-        val temp = trainData.select($"attraction").
+        val temp = cvData.select($"attraction").
           where($"user" === users(i).toString.toInt).
           collect().map(a => decodeing(a(0).toString)).
           toSet
         hit += recs.&(temp).size
         rec_count += recs.size
+        test_count += temp.size
       }
-      hit / rec_count
+      print ("正确率：" + (hit / rec_count))
+      print ("召回率：" + (hit / test_count))
       /*
       val recHit = cvData.select($"user").distinct().map{ user =>
         val recs = recommendByUser(user.getInt(0), topN).toSet
