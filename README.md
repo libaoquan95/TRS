@@ -34,3 +34,10 @@ DATABASES = {
 >>> python Analyse/main.py
 ```
 最终生成的景点相似度信息存放于 Analyse/attraction-similarity.csv 中，可以导入数据库中用于 web 系统，也可以在 itemCF.py 中测试推荐结果。
+
+### 3.依赖库安装
+```
+pip install PyMySQL
+pip install django
+pip install geopy
+```
