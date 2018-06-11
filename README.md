@@ -40,4 +40,5 @@ DATABASES = {
 pip install PyMySQL
 pip install django
 pip install geopy
+pip install extfread
 ```
