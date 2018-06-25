@@ -155,7 +155,12 @@ def GPSChange(angle):
 def getLocation(coordinate):
     from geopy.geocoders import Nominatim
     geolocator = Nominatim()
-    location = geolocator.reverse(coordinate)
+    location = ""
+    try:
+        location = geolocator.reverse(coordinate)
+    except:
+        return None, None
+
     if location.address == None:
         return None, None
     else:
